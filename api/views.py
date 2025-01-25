@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from rest_framework import serializers, status
+from rest_framework import serializers,generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Product
