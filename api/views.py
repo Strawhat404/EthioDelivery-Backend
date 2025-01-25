@@ -2,6 +2,20 @@ from django.contrib.auth.models import User
 from rest_framework import serializers, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from .models import Product
+from .serializers import ProductSerializer
+
+class ProductListCreateView(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    
+# class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = ProductSerializer
+    
+class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
 
 # Serializer for user registration
 class RegisterSerializer(serializers.ModelSerializer):
