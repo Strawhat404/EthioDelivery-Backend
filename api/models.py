@@ -1,6 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+#payment model for the stipe
+class Payment(models.Model):
+    user = models.ForeignKey(User, on_delete= models.CASCADE)
+    amount = models.DecimalField(mac_digits=10,decimal_places=2)
+    stripe_payment_intent_id = models.CharField(max_length = 255)
+    status = models.CharField(max_length=50, choices = [('PENDING','Pending'),('SUCCESS','Success'), ('FAILED', 'Failed')])
+    created_at = models.DateTimeField(auto_now_add=True)
+     
+
 # Product Model
 class Product(models.Model):
     name = models.CharField(max_length=255)  
