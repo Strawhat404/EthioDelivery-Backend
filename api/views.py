@@ -4,6 +4,25 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Product
 from .serializers import ProductSerializer
+import stripe 
+from django.conf import settings
+from django.http import JsonResponse
+from django.views import View
+from .models import Payment
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+class CreatePaymentView(View):
+    def post(self,request):
+        try:
+            data = request.json()
+            amount = int(data["amount"])
+            
+            payment_intent = stripe.PaymentIntent.create(
+                amount = amount,
+                currency = "usd",
+                payment_method_types = ["card"],
+            )
 
 class ProductListCreateView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
