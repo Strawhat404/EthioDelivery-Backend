@@ -23,6 +23,16 @@ class CreatePaymentView(View):
                 currency = "usd",
                 payment_method_types = ["card"],
             )
+            
+            payment = Payment.objects.create(
+                user = request.user,
+                amount = amount /100,
+                stripe_payment_intent_id = payment_intent.id,
+                status = "PENDING", 
+            )
+            return JsonResponse({"clientSecret": payment_intent["client_secret"]})
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
 
 class ProductListCreateView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
