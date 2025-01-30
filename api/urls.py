@@ -2,7 +2,7 @@ from rest_framework_simplejwt.views import(
     TokenObtainPairView, 
     TokenRefreshView,
 )
-from .views import RegisterView,ProductListCreateView, ProductDetailView,OrderListCreateView,OrderDetailView,
+from .views import RegisterView,ProductListCreateView, ProductDetailView,OrderListCreateView,OrderDetailView
 from django.urls import path
 
 urlpatterns = [
