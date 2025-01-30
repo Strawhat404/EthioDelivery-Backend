@@ -1,9 +1,9 @@
 from django.contrib.auth.models import User
-from rest_framework import serializers,generics, status
+from rest_framework import serializers,generics, status, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Product
-from .serializers import ProductSerializer
+from .models import Product,Order
+from .serializers import ProductSerializer, OrderSerializer
 import stripe 
 from django.conf import settings
 from django.http import JsonResponse
@@ -37,6 +37,20 @@ class CreatePaymentView(View):
 class ProductListCreateView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    
+    
+class OrderListCreateView(generics.ListCreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class OrderDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = [permissions.IsAuthenticated]
     
 # class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
 #     queryset = Product.objects.all()
