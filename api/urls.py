@@ -2,7 +2,7 @@ from rest_framework_simplejwt.views import(
     TokenObtainPairView, 
     TokenRefreshView,
 )
-from .views import RegisterView,ProductListCreateView, ProductDetailView
+from .views import RegisterView,ProductListCreateView, ProductDetailView,OrderListCreateView,OrderDetailView,
 from django.urls import path
 
 urlpatterns = [
@@ -11,4 +11,6 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name = 'register'),
     path('products/', ProductListCreateView.as_view(), name = 'product-list-create'),
     path('products/<int:pk>/', ProductDetailView.as_view(), name = 'product-detail'),
+     path('orders/', OrderListCreateView.as_view(), name='order-list-create'),
+    path('orders/<int:pk>/', OrderDetailView.as_view(), name='order-detail'),
 ]
