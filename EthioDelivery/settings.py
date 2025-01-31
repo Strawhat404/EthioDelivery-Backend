@@ -15,6 +15,7 @@ import os
 
 from decouple import config
 
+STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET")
 STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")
 STRIPE_PUBLISHABLE_KEY = config("STRIPE_PUBLISHABLE_KEY")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
