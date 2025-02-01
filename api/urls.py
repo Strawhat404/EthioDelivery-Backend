@@ -16,4 +16,3 @@ urlpatterns = [
     path('orders/<int:pk>/', OrderDetailView.as_view(), name='order-detail'),
     path("stripe/webhook/", stripe_webhook, name="stripe-webhook"),
 ]
-]
